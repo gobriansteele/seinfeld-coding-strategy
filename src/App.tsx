@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Greeting from './Greeting';
+import Answer from './Answer';
+import ChainCounter from './ChainCounter';
 import Button from './Button';
 import './App.css';
 
@@ -14,7 +16,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <Greeting username="Brian" />
-        <Button type="primary">Label goes here</Button>
+        <Answer />
+        <ChainCounter />
       </header>
     </div>
   );
