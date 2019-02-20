@@ -6,8 +6,8 @@ interface IProps {
 }
 
 const Button: React.FunctionComponent<IProps> = ({ buttonType, children }) => {
-  const ButtonWrapper = getButtonStyles(buttonType);
-  return <ButtonWrapper>{children}</ButtonWrapper>;
+  const SCbutton = getButtonStyles(buttonType);
+  return <SCbutton>{children}</SCbutton>;
 };
 
 const getButtonStyles = (buttonType: string) => {
