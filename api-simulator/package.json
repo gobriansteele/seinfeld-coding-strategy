@@ -1,0 +1,15 @@
+{
+  "name": "api-simulator",
+  "version": "1.0.0",
+  "description": "sim services for seinfeld coding strategy",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

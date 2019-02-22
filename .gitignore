@@ -7,6 +7,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/api-simulator/node_modules/**
 
 # testing
 /coverage
