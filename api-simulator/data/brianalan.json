@@ -1,3 +1,6 @@
 {
-  "results": [{ "date": 1551108657580, "value": true }]
+  "results": [
+    { "date": 1551108657580, "value": true },
+    { "date": 1551202654641, "value": false }
+  ]
 }
