@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { reset } from 'styled-reset';
 import Greeting from './Greeting';
-import Answer from './Answer';
-import ChainCounter from './ChainCounter';
-import Tracker from './Tracker';
+
+import CalendarCard from './CalendarCard';
 
 interface IUser {
   username?: string;
@@ -11,32 +11,21 @@ interface IUser {
 
 const App = () => {
   const [user, updateUser] = useState({ username: 'Brian' });
-  useEffect(() => {
-    setTimeout(() => {
-      updateUser({ username: 'Jackie' });
-    }, 3000);
-  }, []);
+  const Reset = createGlobalStyle`${reset}`;
+
   return (
-    <SCappDiv>
+    <>
+      <Reset />
       <SCheaderDiv>
         <Greeting username={user.username} />
-        <Answer />
-        <ChainCounter />
-        <Tracker />
+        <CalendarCard cardType="large" wroteCode={true} />
       </SCheaderDiv>
-      <small>
-        You are running this application in <b>{process.env.NODE_ENV}</b> mode.
-      </small>
-    </SCappDiv>
+    </>
   );
 };
 
-const SCappDiv = styled.div`
-  text-align: center;
-`;
-
 const SCheaderDiv = styled.header`
-  background-color: #282c34;
+  background-color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
