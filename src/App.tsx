@@ -2,29 +2,35 @@ import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
 import Greeting from './Greeting';
-
-import CalendarCard from './CalendarCard';
+import CalendarCard from './Calendar/CalendarCard';
+import { convertApiResponseToCalendarArray } from './Calendar/calendarInfo';
 
 interface IUser {
   username?: string;
 }
 
 const App = () => {
-  const [user, updateUser] = useState({ username: 'Brian' });
+  const [user] = useState<IUser>({ username: 'Brian' });
+  const [calendarDays, updateCalendarDays] = useState<any>(null);
   const Reset = createGlobalStyle`${reset}`;
 
   useEffect(() => {
     fetch('http://192.168.0.3:9011/codingInfo/brianalan')
       .then(data => data.json())
-      .then(data => console.log(data.results));
-  });
+      .then(data => {
+        const formattedData = convertApiResponseToCalendarArray(data.results);
+        updateCalendarDays(formattedData);
+      });
+  }, []);
 
   return (
     <>
       <Reset />
       <SCheaderDiv>
-        <Greeting username={user.username} />
-        <CalendarCard cardType="large" wroteCode={true} />
+        <Greeting username={user.username ? user.username : ''} />
+        {calendarDays && calendarDays.length && (
+          <CalendarCard cardType="large" cardInfo={calendarDays[0]} />
+        )}
       </SCheaderDiv>
     </>
   );
