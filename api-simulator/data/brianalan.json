@@ -1,6 +1,29 @@
 {
   "results": [
-    { "date": 1551108657580, "value": true },
-    { "date": 1551202654641, "value": false }
+    {
+      "username": "brianalan",
+      "date": "2019-3-9",
+      "value": true
+    },
+    {
+      "username": "brianalan",
+      "date": "2019-3-7",
+      "value": false
+    },
+    {
+      "username": "brianalan",
+      "date": "2019-3-6",
+      "value": true
+    },
+    {
+      "username": "brianalan",
+      "date": "2019-3-5",
+      "value": false
+    },
+    {
+      "username": "brianalan",
+      "date": "2019-3-4",
+      "value": true
+    }
   ]
 }

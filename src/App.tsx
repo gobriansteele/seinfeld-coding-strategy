@@ -13,6 +13,12 @@ const App = () => {
   const [user, updateUser] = useState({ username: 'Brian' });
   const Reset = createGlobalStyle`${reset}`;
 
+  useEffect(() => {
+    fetch('http://192.168.0.3:9011/codingInfo/brianalan')
+      .then(data => data.json())
+      .then(data => console.log(data.results));
+  });
+
   return (
     <>
       <Reset />
