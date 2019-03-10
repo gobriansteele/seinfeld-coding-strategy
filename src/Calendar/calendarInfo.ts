@@ -3,12 +3,12 @@ import moment from 'moment';
 interface ICalendarApiResponse {
   username: string;
   date: string;
-  value: boolean;
+  value: boolean | null;
 }
 
 export interface ICalendarDay {
   date: string;
-  wroteCode: boolean;
+  wroteCode: boolean | null;
   momentDay: moment.Moment;
 }
 
@@ -56,4 +56,21 @@ export const convertApiResponseToCalendarArray = (
   } catch (e) {
     console.log(e);
   }
+};
+
+export const getCodingStreak = (calendarDays: ICalendarDay[]): number => {
+  const sortedArrayOfDates: ICalendarDay[] = [];
+  calendarDays.map((item, index) => {
+    if (index === 0) {
+      sortedArrayOfDates.push(item);
+      return;
+    }
+    const sortedArrayLength = sortedArrayOfDates.length;
+    if (sortedArrayLength === 1) {
+      // TODO: Implement code that compares the two and pushes or unshifts based on result (realistically, this could just use the below functionality)
+    } else {
+      // TODO: Implement recursive function that takes the sortedArray and the item and uses a logn algorithm to push the item correctly
+    }
+  });
+  return 0;
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import Button from '../Button';
 import { ICalendarDay } from './calendarInfo';
+import CalendarCardButtons from './CalendarCardButtons';
+import CalendarCardStatus from './CalendarCardStatus';
 
 interface IProps {
   cardType: 'large' | 'small';
@@ -14,6 +15,7 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
   const { wroteCode, momentDay } = props.cardInfo;
   console.log(momentDay.format('D'));
   const CalendarCardContainerDiv = styled.div`
+    text-align: center;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -31,7 +33,7 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
     background: rgba(113, 160, 165, 1);
     h4 {
       font-size: 1.3125rem;
-      color: rgba(238, 238, 238, 1);
+      color: rgba(255, 255, 255, 1);
       font-family: sans-serif;
       line-height: ${cardType === 'large' ? '55px' : '25px'};
     }
@@ -59,10 +61,7 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
         <div className="calendarCardDate">
           <h4>{momentDay.format('D')}</h4>
         </div>
-        <div className="calendarCardButtons">
-          <Button buttonType="primary">I wrote code today</Button>
-          <Button buttonType="negative">I didn't write any code :(</Button>
-        </div>
+        {wroteCode === null ? <CalendarCardButtons /> : <CalendarCardStatus />}
       </CalendarCardBodyDiv>
     </CalendarCardContainerDiv>
   );

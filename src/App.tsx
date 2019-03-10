@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
-import Greeting from './Greeting';
+import Header from './Header/Header';
+import Streak from './Streak';
 import CalendarCard from './Calendar/CalendarCard';
 import { convertApiResponseToCalendarArray } from './Calendar/calendarInfo';
 
@@ -26,23 +27,24 @@ const App = () => {
   return (
     <>
       <Reset />
-      <SCheaderDiv>
-        <Greeting username={user.username ? user.username : ''} />
+      <Header username={user.username} />
+      <SCBodyDiv>
+        <Streak streak={6} />
         {calendarDays && calendarDays.length && (
           <CalendarCard cardType="large" cardInfo={calendarDays[0]} />
         )}
-      </SCheaderDiv>
+      </SCBodyDiv>
     </>
   );
 };
 
-const SCheaderDiv = styled.header`
+const SCBodyDiv = styled.header`
   background-color: #fff;
   min-height: 100vh;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 `;
