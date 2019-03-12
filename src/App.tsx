@@ -4,7 +4,11 @@ import { reset } from 'styled-reset';
 import Header from './Header/Header';
 import Streak from './Streak';
 import CalendarCard from './Calendar/CalendarCard';
-import { convertApiResponseToCalendarArray } from './Calendar/calendarInfo';
+import {
+  convertApiResponseToCalendarArray,
+  getCodingStreak,
+  ICalendarDay
+} from './Calendar/calendarInfo';
 
 interface IUser {
   username?: string;
@@ -21,6 +25,8 @@ const App = () => {
       .then(data => {
         const formattedData = convertApiResponseToCalendarArray(data.results);
         updateCalendarDays(formattedData);
+        console.log(data.results);
+        getCodingStreak(formattedData as ICalendarDay[]);
       });
   }, []);
 

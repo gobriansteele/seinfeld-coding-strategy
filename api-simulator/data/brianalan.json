@@ -2,6 +2,16 @@
   "results": [
     {
       "username": "brianalan",
+      "date": "2019-03-04",
+      "value": true
+    },
+    {
+      "username": "brianalan",
+      "date": "2019-03-05",
+      "value": false
+    },
+    {
+      "username": "brianalan",
       "date": "2019-03-09",
       "value": true
     },
@@ -13,16 +23,6 @@
     {
       "username": "brianalan",
       "date": "2019-03-06",
-      "value": true
-    },
-    {
-      "username": "brianalan",
-      "date": "2019-03-05",
-      "value": false
-    },
-    {
-      "username": "brianalan",
-      "date": "2019-03-04",
       "value": true
     }
   ]

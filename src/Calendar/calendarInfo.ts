@@ -42,6 +42,7 @@ export const convertApiResponseToCalendarArray = (
 ): ICalendarDay[] | undefined => {
   try {
     const calendarDayArray = serviceResponse.map(item => {
+      console.log(item.date);
       const dateFormat = 'YYYY-MM-D'; // Soley used to get rid of moment deprecation warnings
       const momentDay = moment(item.date, dateFormat);
       const stringDay = momentDay.format('YYYY MMMM D');
@@ -52,6 +53,7 @@ export const convertApiResponseToCalendarArray = (
       };
       return calendarDay;
     });
+    console.log(`I am the calendar day array`, calendarDayArray);
     return calendarDayArray;
   } catch (e) {
     console.log(e);
@@ -59,18 +61,18 @@ export const convertApiResponseToCalendarArray = (
 };
 
 export const getCodingStreak = (calendarDays: ICalendarDay[]): number => {
-  const sortedArrayOfDates: ICalendarDay[] = [];
-  calendarDays.map((item, index) => {
-    if (index === 0) {
-      sortedArrayOfDates.push(item);
-      return;
-    }
-    const sortedArrayLength = sortedArrayOfDates.length;
-    if (sortedArrayLength === 1) {
-      // TODO: Implement code that compares the two and pushes or unshifts based on result (realistically, this could just use the below functionality)
-    } else {
-      // TODO: Implement recursive function that takes the sortedArray and the item and uses a logn algorithm to push the item correctly
-    }
-  });
+  const sortedArrayOfDates = sortArrayOfCalendarDays(calendarDays);
+  console.log(sortedArrayOfDates);
   return 0;
+};
+
+export const sortArrayOfCalendarDays = (
+  calendarDays: ICalendarDay[]
+): ICalendarDay[] => {
+  const sortedArray = calendarDays.sort((calendarDayA, calendarDayB) => {
+    if (calendarDayA.momentDay.isBefore(calendarDayB.momentDay)) {
+      return 1;
+    } else return -1;
+  });
+  return sortedArray;
 };

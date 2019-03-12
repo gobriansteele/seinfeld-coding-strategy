@@ -1,4 +1,10 @@
-import { convertApiResponseToCalendarArray } from './calendarInfo';
+import moment from 'moment';
+
+import {
+  convertApiResponseToCalendarArray,
+  sortArrayOfCalendarDays,
+  ICalendarDay
+} from './calendarInfo';
 
 const mockApiResponse = {
   results: [
@@ -53,7 +59,24 @@ const expectedResponse = [
   }
 ];
 
+const unsortedArray: ICalendarDay[] = [
+  { date: '2019 March 4', wroteCode: true, momentDay: moment('2019-03-04') },
+  { date: '2019 March 8', wroteCode: true, momentDay: moment('2019-03-08') },
+  { date: '2019 March 6', wroteCode: true, momentDay: moment('2019-03-06') }
+];
+
+const sortedArray: ICalendarDay[] = [
+  { date: '2019 March 8', wroteCode: true, momentDay: moment('2019-03-08') },
+  { date: '2019 March 6', wroteCode: true, momentDay: moment('2019-03-06') },
+  { date: '2019 March 4', wroteCode: true, momentDay: moment('2019-03-04') }
+];
+
 test('Calendar Info is converted to the correct format', () => {
   const fnResults = convertApiResponseToCalendarArray(mockApiResponse.results);
   expect(fnResults).toMatchObject(expectedResponse);
+});
+
+test('sorting function sorts the array of days in the correct order', () => {
+  const myResults = sortArrayOfCalendarDays(unsortedArray);
+  expect(myResults).toEqual(sortedArray);
 });
