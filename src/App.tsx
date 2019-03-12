@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
 import Header from './Header/Header';
@@ -7,7 +7,8 @@ import CalendarCard from './Calendar/CalendarCard';
 import {
   convertApiResponseToCalendarArray,
   getCodingStreak,
-  ICalendarDay
+  ICalendarDay,
+  sortArrayOfCalendarDays
 } from './Calendar/calendarInfo';
 
 interface IUser {
@@ -24,9 +25,13 @@ const App = () => {
       .then(data => data.json())
       .then(data => {
         const formattedData = convertApiResponseToCalendarArray(data.results);
-        updateCalendarDays(formattedData);
-        console.log(data.results);
-        getCodingStreak(formattedData as ICalendarDay[]);
+        if (formattedData && formattedData.length) {
+          updateCalendarDays(
+            sortArrayOfCalendarDays(formattedData as ICalendarDay[])
+          );
+        } else {
+          updateCalendarDays(formattedData);
+        }
       });
   }, []);
 

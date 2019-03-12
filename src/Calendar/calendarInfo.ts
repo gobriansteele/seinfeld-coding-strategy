@@ -42,7 +42,6 @@ export const convertApiResponseToCalendarArray = (
 ): ICalendarDay[] | undefined => {
   try {
     const calendarDayArray = serviceResponse.map(item => {
-      console.log(item.date);
       const dateFormat = 'YYYY-MM-D'; // Soley used to get rid of moment deprecation warnings
       const momentDay = moment(item.date, dateFormat);
       const stringDay = momentDay.format('YYYY MMMM D');
@@ -53,7 +52,6 @@ export const convertApiResponseToCalendarArray = (
       };
       return calendarDay;
     });
-    console.log(`I am the calendar day array`, calendarDayArray);
     return calendarDayArray;
   } catch (e) {
     console.log(e);
@@ -62,7 +60,6 @@ export const convertApiResponseToCalendarArray = (
 
 export const getCodingStreak = (calendarDays: ICalendarDay[]): number => {
   const sortedArrayOfDates = sortArrayOfCalendarDays(calendarDays);
-  console.log(sortedArrayOfDates);
   return 0;
 };
 
