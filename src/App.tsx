@@ -62,7 +62,7 @@ const App = () => {
         <Streak streak={6} />
         {activeDay && <CalendarCard cardType="large" cardInfo={activeDay} />}
         {nonActiveDays && (
-          <div>
+          <SCNonActiveDiv>
             {nonActiveDays.map((nonActiveDay, key) => {
               return (
                 <CalendarCard
@@ -72,14 +72,14 @@ const App = () => {
                 />
               );
             })}
-          </div>
+          </SCNonActiveDiv>
         )}
       </SCBodyDiv>
     </>
   );
 };
 
-const SCBodyDiv = styled.header`
+const SCBodyDiv = styled.div`
   background-color: #fff;
   min-height: 100vh;
   padding-top: 20px;
@@ -88,6 +88,16 @@ const SCBodyDiv = styled.header`
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
+`;
+
+const SCNonActiveDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 480px;
 `;
 
 export default App;
