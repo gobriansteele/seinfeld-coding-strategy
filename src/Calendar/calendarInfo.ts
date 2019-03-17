@@ -73,3 +73,15 @@ export const sortArrayOfCalendarDays = (
   });
   return sortedArray;
 };
+
+export const getArrayOfNonActiveDays = (
+  activeDay: ICalendarDay,
+  calendarDays: ICalendarDay[]
+): ICalendarDay[] => {
+  const nonActiveDays: ICalendarDay[] = [];
+  calendarDays.forEach(calendarDay => {
+    if (calendarDay.date !== activeDay.date) nonActiveDays.push(calendarDay);
+  });
+
+  return nonActiveDays;
+};

@@ -13,7 +13,6 @@ interface IProps {
 const CardContainer: React.FunctionComponent<IProps> = props => {
   const { cardType } = props;
   const { wroteCode, momentDay } = props.cardInfo;
-  console.log(momentDay.format('D'));
   const CalendarCardContainerDiv = styled.div`
     text-align: center;
     box-sizing: border-box;
@@ -32,7 +31,7 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
     height: ${cardType === 'large' ? '55px' : '25px'};
     background: rgba(113, 160, 165, 1);
     h4 {
-      font-size: 1.3125rem;
+      font-size: ${cardType === 'large' ? '1.3125rem' : '.75rem'};
       color: rgba(255, 255, 255, 1);
       font-family: sans-serif;
       line-height: ${cardType === 'large' ? '55px' : '25px'};
@@ -43,12 +42,12 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
     height: calc(100% - ${cardType === 'large' ? '55px' : '25px'});
     padding: 0 10px;
     h4 {
-      font-size: 100px;
+      font-size: ${cardType === 'large' ? '100px' : '40px'};
       font-family: sans-serif;
       font-weight: 800;
       color: rgba(113, 160, 165, 1);
       line-height: 100%;
-      margin: 10px 0;
+      margin: ${cardType === 'large' ? '10px 0' : '4px 0'};
     }
   `;
 
@@ -58,10 +57,14 @@ const CardContainer: React.FunctionComponent<IProps> = props => {
         <h4>{`${momentDay.format('dddd')}, ${momentDay.format('MMMM')}`}</h4>
       </CalendarCardHeaderDiv>
       <CalendarCardBodyDiv>
-        <div className="calendarCardDate">
+        <div>
           <h4>{momentDay.format('D')}</h4>
         </div>
-        {wroteCode === null ? <CalendarCardButtons /> : <CalendarCardStatus />}
+        {wroteCode === null ? (
+          <CalendarCardButtons />
+        ) : (
+          <CalendarCardStatus iconSize={props.cardType} />
+        )}
       </CalendarCardBodyDiv>
     </CalendarCardContainerDiv>
   );

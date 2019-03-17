@@ -1,12 +1,18 @@
 import React from 'react';
 
-const DoneCheckmark = () => {
+interface Props {
+  iconSize: 'large' | 'small';
+}
+
+const DoneCheckmark: React.FunctionComponent<Props> = ({ iconSize }) => {
+  const dimension: string = iconSize === 'large' ? '75px' : '25px';
   return (
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      height="75"
-      width="75"
+      height={dimension}
+      width={dimension}
+      viewBox="0 0 75 75"
     >
       <defs>
         <ellipse

@@ -8,7 +8,8 @@ import {
   convertApiResponseToCalendarArray,
   getCodingStreak,
   ICalendarDay,
-  sortArrayOfCalendarDays
+  sortArrayOfCalendarDays,
+  getArrayOfNonActiveDays
 } from './Calendar/calendarInfo';
 
 interface IUser {
@@ -18,6 +19,10 @@ interface IUser {
 const App = () => {
   const [user] = useState<IUser>({ username: 'Brian' });
   const [calendarDays, updateCalendarDays] = useState<any>(null);
+  const [activeDay, updateActiveDay] = useState<ICalendarDay | null>(null);
+  const [nonActiveDays, updateNonActiveDays] = useState<ICalendarDay[] | null>(
+    null
+  );
   const Reset = createGlobalStyle`${reset}`;
 
   useEffect(() => {
@@ -35,14 +40,39 @@ const App = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (calendarDays && calendarDays.length) {
+      updateActiveDay(calendarDays[0]);
+    } else {
+      if (calendarDays) updateActiveDay(calendarDays);
+    }
+  }, [calendarDays]);
+
+  useEffect(() => {
+    if (activeDay && calendarDays) {
+      updateNonActiveDays(getArrayOfNonActiveDays(activeDay, calendarDays));
+    }
+  }, [activeDay, calendarDays]);
+
   return (
     <>
       <Reset />
       <Header username={user.username} />
       <SCBodyDiv>
         <Streak streak={6} />
-        {calendarDays && calendarDays.length && (
-          <CalendarCard cardType="large" cardInfo={calendarDays[0]} />
+        {activeDay && <CalendarCard cardType="large" cardInfo={activeDay} />}
+        {nonActiveDays && (
+          <div>
+            {nonActiveDays.map((nonActiveDay, key) => {
+              return (
+                <CalendarCard
+                  cardType="small"
+                  cardInfo={nonActiveDay}
+                  key={key}
+                />
+              );
+            })}
+          </div>
         )}
       </SCBodyDiv>
     </>
